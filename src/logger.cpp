@@ -1,3 +1,6 @@
+/* LOGGER.CPP - Implementation of Logger class.
+ * Claudia Jughashvili, 2019 
+ */
 
 #include <logger.hpp>
 #include <ctime>
@@ -17,13 +20,16 @@ namespace liblog {
 
   Logger::Logger (const std::string& path) {
     log_file_ = std::ofstream (path);
+    log_file_path_ = path;
     if (!log_file_.is_open ())
       throw "Unable to open log file!";
   };
 
   Logger::~Logger (void) {
-    if (log_file_.is_open ())
+    if (log_file_.is_open ()) {
       log_file_.close ();
+      log_file_path_.clear ();
+    };
   };
 
   void Logger::Log (const std::string& text, bool to_console) {

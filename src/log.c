@@ -1,3 +1,6 @@
+/* LOG.C - Implementation of various C functions.
+ * Claudia Jughashvili, 2019 
+ */
 
 #include <stdint.h>
 #include <stdio.h>
