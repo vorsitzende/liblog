@@ -59,8 +59,5 @@ int log_to_file (const char* text) {
 };
 
 int log_to_console (const char* text) {
-  if (!log_file)
-    return -1;
-
   return printf ("%s %s\n", get_timestamp (), text);
 };
