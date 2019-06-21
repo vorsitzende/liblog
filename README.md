@@ -1,0 +1,2 @@
+# liblog
+Simple Logger Framework
