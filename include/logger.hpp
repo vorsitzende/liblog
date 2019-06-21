@@ -9,31 +9,42 @@
 #error This header file requires C++!
 #endif /* __cplusplus */
 
-#include <fstream>  // std::ofstream
-#include <string>   // std::string
+#include <string>
 
 namespace liblog {
 
   class Logger {
-    std::ofstream log_file_;
-    std::string log_file_path_;
   public:
-    Logger (void) noexcept = delete;
+    inline Logger (void) = default;
     Logger (const Logger&) = delete;
-    Logger& operator= (const Logger&) = delete;
-    /* Initialize Logger with path to log file. */
-    Logger (const std::string& path);
-    ~Logger (void);
-    /* Log a string either to console or log file. */
-    void Log (const std::string& text, bool to_console = false);
+    /* Initialize logger system with path to log file. */
+    inline Logger (const std::string& path) {
+      log_init (path.c_str ());
+    };
+    inline ~Logger (void) {
+      log_close ();
+    };
+    /* Log a string either to file or standard output. */
+    static inline int Log (const std::string& text, bool to_console = false)
+      noexcept
+    {
+      if (to_console)
+        return log_to_console (text.c_str ());
+
+      return log_file_path ()
+        ? log_to_file (text.c_str ())
+        : log_to_console (text.c_str ());
+    };
+    /* Log a string either to file or standard output. */
+    inline int operator() (const std::string& text) noexcept {
+      return this->Log (text);
+    };
     /* Get path to log file. */
-    inline const std::string& Path (void) const { return log_file_path_; };
-    /* Log a string either to console or log file. */
-    inline void operator() (
-      const std::string& text,
-      bool to_console = false
-    ) {
-      this->Log (text, to_console);
+    static inline const std::string Path (void) noexcept {
+      return std::string (log_file_path ());
+    };
+    inline operator const std::string (void) const noexcept {
+      return this->Path ();
     };
   };
 
