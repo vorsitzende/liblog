@@ -4,7 +4,7 @@
 
 #ifdef __cplusplus
 #include <cstdint>  // intptr_t
-namespace log {
+namespace liblog {
   extern "C" {
 #else
 #include <stdint.h> // intptr_t

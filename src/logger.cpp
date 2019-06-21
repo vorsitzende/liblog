@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iostream>
 
-namespace log {
+namespace liblog {
 
   static const char* get_timestamp (void) {
     time_t rawtime;

@@ -8,7 +8,7 @@
 
 #include <fstream>  // std::ofstream
 
-namespace log {
+namespace liblog {
 
   class Logger {
     std::ofstream log_file_;
