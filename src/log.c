@@ -29,6 +29,7 @@ intptr_t log_init (const char* path) {
     fclose (log_file);
     log_file = 0;
     free (log_path);
+    log_path = 0;
   };
 
   log_file = fopen (path, "w");
@@ -45,6 +46,7 @@ intptr_t log_close (void) {
     fclose (log_file);
     log_file = 0;
     free (log_path);
+    log_path = 0;
   };
 
   return (intptr_t)log_file;
